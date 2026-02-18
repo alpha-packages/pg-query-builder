@@ -8,7 +8,10 @@
   </servers>
   <profiles>
     <profile>
-      <id>gpg</id>
+      <id>ossrh</id>
+      <activation>
+        <activeByDefault>true</activeByDefault>
+      </activation>
       <properties>
         <gpg.executable>gpg</gpg.executable>
         <gpg.passphrase>YOUR_GPG_PASSPHRASE</gpg.passphrase>
