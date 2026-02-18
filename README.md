@@ -38,8 +38,8 @@ Compose complex SQL queries programmatically — no raw SQL strings, no JPA over
 
 ```xml
 <dependency>
-    <groupId>io.github.YOUR_GITHUB_USERNAME</groupId>
-    <artifactId>custom-query-builder</artifactId>
+    <groupId>io.github.alpha-packages</groupId>
+    <artifactId>pg-query-builder</artifactId>
     <version>1.0.0</version>
 </dependency>
 ```
@@ -47,7 +47,7 @@ Compose complex SQL queries programmatically — no raw SQL strings, no JPA over
 ### Gradle
 
 ```groovy
-implementation 'io.github.YOUR_GITHUB_USERNAME:custom-query-builder:1.0.0'
+implementation 'io.github.alpha-packages:pg-query-builder:1.0.0'
 ```
 
 ---
