@@ -1,0 +1,18 @@
+<settings>
+  <servers>
+    <server>
+      <id>central</id>
+      <username>YOUR_SONATYPE_TOKEN_USERNAME</username>
+      <password>YOUR_SONATYPE_TOKEN_PASSWORD</password>
+    </server>
+  </servers>
+  <profiles>
+    <profile>
+      <id>gpg</id>
+      <properties>
+        <gpg.executable>gpg</gpg.executable>
+        <gpg.passphrase>YOUR_GPG_PASSPHRASE</gpg.passphrase>
+      </properties>
+    </profile>
+  </profiles>
+</settings>

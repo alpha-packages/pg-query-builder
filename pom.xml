@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+         https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <!-- ===================================================================
+         COORDINATES  — change groupId / artifactId to match your namespace
+         =================================================================== -->
+    <groupId>io.github.YOUR_GITHUB_USERNAME</groupId>
+    <artifactId>custom-query-builder</artifactId>
+    <version>1.0.0</version>
+    <packaging>jar</packaging>
+
+    <!-- ===================================================================
+         PROJECT METADATA  (required by Maven Central)
+         =================================================================== -->
+    <name>Custom Query Builder</name>
+    <description>
+        A fluent, type-safe SQL query builder for Spring Data R2DBC / JDBC.
+        Compose complex SQL queries programmatically without writing raw SQL strings.
+    </description>
+    <url>https://github.com/YOUR_GITHUB_USERNAME/custom-query-builder</url>
+
+    <licenses>
+        <license>
+            <name>MIT License</name>
+            <url>https://opensource.org/licenses/MIT</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+
+    <developers>
+        <developer>
+            <id>YOUR_GITHUB_USERNAME</id>
+            <name>Your Full Name</name>
+            <email>your@email.com</email>
+            <url>https://github.com/YOUR_GITHUB_USERNAME</url>
+        </developer>
+    </developers>
+
+    <scm>
+        <connection>scm:git:git://github.com/YOUR_GITHUB_USERNAME/custom-query-builder.git</connection>
+        <developerConnection>scm:git:ssh://github.com/YOUR_GITHUB_USERNAME/custom-query-builder.git</developerConnection>
+        <url>https://github.com/YOUR_GITHUB_USERNAME/custom-query-builder/tree/main</url>
+    </scm>
+
+    <!-- ===================================================================
+         PROPERTIES
+         =================================================================== -->
+    <properties>
+        <java.version>17</java.version>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+
+        <!-- Dependency versions -->
+        <spring-data-relational.version>3.2.5</spring-data-relational.version>
+        <spring-boot.version>3.2.5</spring-boot.version>
+        <lombok.version>1.18.32</lombok.version>
+        <jakarta-validation.version>3.0.2</jakarta-validation.version>
+
+        <!-- Plugin versions -->
+        <maven-source-plugin.version>3.3.1</maven-source-plugin.version>
+        <maven-javadoc-plugin.version>3.6.3</maven-javadoc-plugin.version>
+        <maven-gpg-plugin.version>3.2.4</maven-gpg-plugin.version>
+        <central-publishing-plugin.version>0.5.0</central-publishing-plugin.version>
+    </properties>
+
+    <!-- ===================================================================
+         DEPENDENCIES
+         =================================================================== -->
+    <dependencies>
+
+        <!-- Spring Data Relational — provides @Table, @Column annotations -->
+        <dependency>
+            <groupId>org.springframework.data</groupId>
+            <artifactId>spring-data-relational</artifactId>
+            <version>${spring-data-relational.version}</version>
+            <!-- provided: consumers bring their own Spring version -->
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- Spring Boot R2DBC starter — provides DatabaseClient -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-r2dbc</artifactId>
+            <version>${spring-boot.version}</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- Lombok — compile-time only, not shipped in the JAR -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>${lombok.version}</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- Jakarta Bean Validation — @NotEmpty used in Root.get() -->
+        <dependency>
+            <groupId>jakarta.validation</groupId>
+            <artifactId>jakarta.validation-api</artifactId>
+            <version>${jakarta-validation.version}</version>
+            <scope>provided</scope>
+        </dependency>
+
+    </dependencies>
+
+    <!-- ===================================================================
+         BUILD — always attach sources + javadoc (required by Central)
+         =================================================================== -->
+    <build>
+        <plugins>
+
+            <!-- Compile with Lombok annotation processing -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.13.0</version>
+                <configuration>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
+                    <annotationProcessorPaths>
+                        <path>
+                            <groupId>org.projectlombok</groupId>
+                            <artifactId>lombok</artifactId>
+                            <version>${lombok.version}</version>
+                        </path>
+                    </annotationProcessorPaths>
+                </configuration>
+            </plugin>
+
+            <!-- Attach sources JAR (required by Maven Central) -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <version>${maven-source-plugin.version}</version>
+                <executions>
+                    <execution>
+                        <id>attach-sources</id>
+                        <goals>
+                            <goal>jar-no-fork</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <!-- Attach Javadoc JAR (required by Maven Central) -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>${maven-javadoc-plugin.version}</version>
+                <configuration>
+                    <doclint>none</doclint>
+                    <quiet>true</quiet>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>attach-javadocs</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <!-- GPG signing (required by Maven Central) -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-gpg-plugin</artifactId>
+                <version>${maven-gpg-plugin.version}</version>
+                <executions>
+                    <execution>
+                        <id>sign-artifacts</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>sign</goal>
+                        </goals>
+                        <configuration>
+                            <!-- Reads passphrase from env var GPG_PASSPHRASE (set in CI) -->
+                            <gpgArguments>
+                                <arg>--pinentry-mode</arg>
+                                <arg>loopback</arg>
+                            </gpgArguments>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <!-- Sonatype Central Publishing Plugin -->
+            <plugin>
+                <groupId>org.sonatype.central</groupId>
+                <artifactId>central-publishing-maven-plugin</artifactId>
+                <version>${central-publishing-plugin.version}</version>
+                <extensions>true</extensions>
+                <configuration>
+                    <!-- Matches the <server id> in ~/.m2/settings.xml -->
+                    <publishingServerId>central</publishingServerId>
+                    <!-- Set to true to auto-publish after validation passes -->
+                    <autoPublish>false</autoPublish>
+                    <!-- Wait for the deployment to be validated before returning -->
+                    <waitUntil>validated</waitUntil>
+                </configuration>
+            </plugin>
+
+        </plugins>
+    </build>
+
+</project>
