@@ -1,6 +1,6 @@
-# Custom Query Builder
+# pg-query-builder
 
-[![Maven Central](https://img.shields.io/maven-central/v/io.github.YOUR_GITHUB_USERNAME/custom-query-builder.svg?label=Maven%20Central)](https://search.maven.org/artifact/io.github.YOUR_GITHUB_USERNAME/custom-query-builder)
+[![Maven Central](https://img.shields.io/maven-central/v/io.github.alpha-packages/pg-query-builder.svg?label=Maven%20Central)](https://search.maven.org/artifact/io.github.alpha-packages/pg-query-builder)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Java](https://img.shields.io/badge/Java-17%2B-blue.svg)](https://openjdk.org/projects/jdk/17/)
 
